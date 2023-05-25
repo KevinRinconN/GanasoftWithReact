@@ -1,8 +1,13 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { loginApi } from '../../../api/user';
+import { useAuth } from '../../../hooks';
+
 
 export const LoginForm = () => {
+
+    // console.log(useAuth());
+    const {login} = useAuth();
 
     const formik = useFormik({
         initialValues: initialValues(),
@@ -10,7 +15,9 @@ export const LoginForm = () => {
         onSubmit: async (formValue) => {
             try {
                 const response = await loginApi (formValue);
-                console.log(response);
+                const {access} = response;
+                login(access);
+                // console.log(access);
             } catch (error) {
                 console.log('ERROR');
                 console.error(error);
@@ -27,11 +34,11 @@ export const LoginForm = () => {
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6" action="#" method="POST" onSubmit={formik.handleSubmit}>
+                <form className="space-y-6" onSubmit={formik.handleSubmit}>
                 <div>
-                    <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                    <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Username</label>
                     <div className="mt-2">
-                    <input id="email" name="email" type="email" value={formik.values.email} onChange={formik.handleChange} autoComplete="email" required className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                    <input id="name" name="username" type="text" value={formik.values.username} onChange={formik.handleChange} required className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                     </div>
                 </div>
 
@@ -43,7 +50,7 @@ export const LoginForm = () => {
                     </div>
                     </div>
                     <div className="mt-2">
-                    <input id="password" name="password" type="password" value={formik.values.password} onChange={formik.handleChange} autoComplete="current-password" required className="block w-full rounded-md border-0 p-1.5  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                    <input id="password" name="password" type="password" value={formik.values.password} onChange={formik.handleChange} required className="block w-full rounded-md border-0 p-1.5  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                     </div>
                 </div>
 
@@ -63,14 +70,14 @@ export const LoginForm = () => {
 
 const initialValues = () => {
     return {
-        email: '',
+        username: '',
         password: '',
     };
 }
 
 const validationSchema = () => {
     return {
-        email: Yup.string().email(true).required(true),
-        password: Yup.string().required(true),
+        username: Yup.string().required('true'),
+        password: Yup.string().required("inserte una contraseña"),
     }
 }

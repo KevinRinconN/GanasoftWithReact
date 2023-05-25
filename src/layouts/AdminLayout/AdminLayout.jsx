@@ -1,13 +1,16 @@
 import { LoginAdmin } from "../../pages";
+import { useAuth } from "../../hooks";
+import { TopMenu } from "../../Components/Admin";
 
 export const AdminLayout = ({children}) => {
-    const auth = null;
+   
+    const {auth} = useAuth();
 
     if (!auth) return <LoginAdmin/>
     
     return (
         <>
-            <h1>AdminLayout</h1>
+            <TopMenu/>
             {children}
         </>
     )
