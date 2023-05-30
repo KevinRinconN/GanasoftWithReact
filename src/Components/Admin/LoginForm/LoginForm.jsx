@@ -17,7 +17,7 @@ export const LoginForm = () => {
                 const response = await loginApi (formValue);
                 const {access} = response;
                 login(access);
-                // console.log(access);
+                console.log(access);
             } catch (error) {
                 console.log('ERROR');
                 console.error(error);
