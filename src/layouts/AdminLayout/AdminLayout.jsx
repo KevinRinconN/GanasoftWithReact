@@ -17,6 +17,9 @@ export const AdminLayout = ({children}) => {
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex justify-between h-16">
                             <div className="flex">
+                                <div className="inline-flex items-center px-1 pt-1 text-indigo-500 font-bold text-lg">
+                                    Ganasoft
+                                </div>
 
                                 <div className="hidden space-x-8 sm:-py-px sm:ml-10 sm:flex">
                                     <ItemNav
@@ -44,6 +47,10 @@ export const AdminLayout = ({children}) => {
                     </div>
                     
                 </nav>
+                
+                <div>
+                    {children}
+                </div>
             </div>  
         </>
     )

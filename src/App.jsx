@@ -4,9 +4,9 @@ import './index.css'
 export const App = () => {
     return (
         <>
-            {/* <AuthProvider> */}
+            <AuthProvider>
                 <Navigation/>
-            {/* </AuthProvider> */}
+            </AuthProvider>
             
         </>
     )
